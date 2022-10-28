@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Doctor, Patient, Consultations
 
-def signup(request):
-  return HttpResponse('MedicalSys')
+def initial_page(request):
+  return render(request,'clinicMedicalSys/index.html')
