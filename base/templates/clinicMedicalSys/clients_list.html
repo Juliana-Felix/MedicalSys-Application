@@ -1,0 +1,19 @@
+<h1>Clients List</h1>
+<h3><a href="{% url 'client-create' %}">View</a></a></h3>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th></th>
+  </tr>
+  {% for client in clients %}
+  <tr>
+    <td>{{client.name}}</td>
+    <td><a href="{% url 'client' client.id %}">View</a></td>
+    <td><a href="{% url 'client-update' client.id %}">Edit</a></td>
+    <td><a href="{% url 'client-delete' client.id %}">Delete</a></td>
+  </tr>
+  {% empty %}
+  <h3>No clients in list</h3>
+  {% endfor %}
+</table>

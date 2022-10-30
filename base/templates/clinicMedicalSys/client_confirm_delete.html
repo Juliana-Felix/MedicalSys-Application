@@ -1,0 +1,7 @@
+<a href="{% url 'PatientsList' %}">Voltar</a>
+
+<form method="POST">
+  {% csrf_token %}
+  <P>Você tem certeza que deseja deletar esse cliente? "{{client}}"</P>
+  <input type="submit" value="Delete">
+</form>
