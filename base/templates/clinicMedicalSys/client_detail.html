@@ -1,1 +1,31 @@
-<h1>Client: {{client}}</h1>
+{% extends 'clinicMedicalSys/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  #detail-card {
+    background-color: #11887e85;
+    padding: 40px;
+    border-radius: 15px;
+  }
+
+  a {
+    color: rgba(0, 0, 0, 0.507);
+    text-decoration: none;
+  }
+
+  a::after {
+    content: " →";
+  }
+</style>
+
+<div class="card" style="width: 18rem;" id="detail-card">
+  <div class="card-body">
+    {% csrf_token %}
+    <p>Cliente: {{client}}</p>
+    <p>Adicionado(a): {{client.created_at}}</p>
+    <p>Editado(a): {{client.edited}}</p>
+  </div>
+</div>
+<a href="{% url 'PatientsList' %}">Voltar</a>
+{% endblock %}

@@ -1,8 +1,49 @@
-<h3>Client Form</h3>
-<a href="{% url 'PatientsList' %}">Go back</a>
+{% extends 'clinicMedicalSys/base.html' %}
+{% load static %}
 
-<form method="POST" action="">
-  {%csrf_token%}
-  {{form.as_p}}
-  <input type="submit" value="Submit">
+{% block content %}
+
+<style>
+  input {
+    border-radius: 5px;
+    border-color: rgb(185, 185, 185)
+  }
+
+  #updateclient-form {
+    background-color: #11887e85;
+    padding: 30px;
+    border-radius: 15px;
+  }
+
+  label {
+    width: 80px;
+    display: inline-block;
+  }
+
+  #input-submit {
+    width: 90%;
+  }
+
+  a {
+    color: rgba(0, 0, 0, 0.507);
+    text-decoration: none;
+  }
+
+  a::after {
+    content: " →";
+  }
+</style>
+
+<h3>Atualizar cliente</h3>
+
+<form method="POST" action="" id="updateclient-form">
+  <div class="container text-center">
+    <div class="row-2">
+      {%csrf_token%}
+      {{form.as_p}}
+    </div>
+  </div>
+  <input type="submit" value="Atualizar" id="input-submit">
 </form>
+<a href="{% url 'PatientsList' %}">Voltar</a>
+{% endblock %}

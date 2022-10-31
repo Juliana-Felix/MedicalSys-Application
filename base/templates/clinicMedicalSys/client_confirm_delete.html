@@ -1,7 +1,37 @@
-<a href="{% url 'PatientsList' %}">Voltar</a>
+{% extends 'clinicMedicalSys/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  #delete-card {
+    background-color: #11887e85;
+    padding: 30px;
+    border-radius: 15px;
+  }
+
+  input {
+    background-color: rgb(216, 27, 27);
+    color: #fff;
+  }
+
+  a {
+    color: rgba(0, 0, 0, 0.507);
+    text-decoration: none;
+  }
+
+  a::after {
+    content: " →";
+  }
+</style>
 
 <form method="POST">
-  {% csrf_token %}
-  <P>Você tem certeza que deseja deletar esse cliente? "{{client}}"</P>
-  <input type="submit" value="Delete">
+  <div class="card" style="width: 18rem;" id="delete-card">
+    <div class="card-body">
+      {% csrf_token %}
+      <P>Você tem certeza que deseja deletar esse cliente? "{{client}}"</P>
+      <input type="submit" value="Deletar">
+    </div>
+  </div>
 </form>
+<a href="{% url 'PatientsList' %}">Voltar</a>
+{%endblock%}

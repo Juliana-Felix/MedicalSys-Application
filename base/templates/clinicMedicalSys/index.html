@@ -3,22 +3,54 @@
 {% block content %}
 {% load static %}
 
-{% if request.user.is_authenticated %}
-<p>{{request.user}}</p>
-<a href="{% url 'logout' %}">Logout</a>
-{% else %}
-<a href="{% url 'login' %}">Login</a>
-{% endif %}
+<style>
+  .container {
+    text-align: center;
+    color: white;
+    margin-top: 3rem;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 4rem;
+    font-weight: 400;
+  }
+
+  p {
+    font-size: 1.15rem;
+    letter-spacing: 3px;
+    margin: 20px 0 40px;
+  }
+
+  button {
+    color: white;
+    border: 2px white solid;
+    padding: 10px 15px;
+    border-radius: 5px;
+  }
+
+  .container a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.507);
+  }
+</style>
 
 <div>
-  <td>
-    <a class="btn btn-default">
-      <button type="button" class="btn btn-secondary btn-lg">Criar cliente</button>
-    </a>
-    <a class="btn btn-default">
-      <button type="button" class="btn btn-secondary btn-lg">Cliente</button>
-    </a>
-  </td>
-</div>>
+  <section class="section-one">
+    <div class="container">
+      <h1>Bem vindo ao MedicalSys</h1>
+      <p>Gestão prática e descomplicada para sua clínica e consultório</p>
+      {% if request.user.is_authenticated %}
+
+      <p>{{request.user}}</p>
+      <button><a href="{% url 'logout' %}">Logout</a></button>
+      {% else %}
+      <button><a href="{% url 'login' %}">Login</a></button>
+      {% endif %}
+    </div>
+  </section>
+
+</div>
 
 {% endblock %}

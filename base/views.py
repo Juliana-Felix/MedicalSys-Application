@@ -13,9 +13,10 @@ class CustomLoginView(LoginView):
   template_name = 'clinicMedicalSys/login.html'
   fields = '__all__'
   redirect_authenticated_user = True
+  context_object_name = 'logins'
 
   def get_success_url(self):
-    return reverse_lazy('initial_page')
+    return reverse_lazy('PatientsList')
 
 class PatientsList(ListView):
   template_name = 'clinicMedicalSys/clients_list.html'

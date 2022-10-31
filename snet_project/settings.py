@@ -59,7 +59,7 @@ ROOT_URLCONF = 'snet_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates/clinicMedicalSys')],
+        'DIRS': 'templates',
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
