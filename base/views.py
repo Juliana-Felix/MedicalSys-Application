@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Doctor, Patient, Consultations
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -18,31 +19,31 @@ class CustomLoginView(LoginView):
   def get_success_url(self):
     return reverse_lazy('PatientsList')
 
-class PatientsList(ListView):
+class PatientsList(LoginRequiredMixin, ListView):
   template_name = 'clinicMedicalSys/clients_list.html'
   model = Patient
   context_object_name = 'clients'
 
-class ClientDetail(DetailView):
+class ClientDetail(LoginRequiredMixin, DetailView):
   template_name = 'clinicMedicalSys/client_detail.html'
   context_object_name = 'client'
   model = Patient
 
-class ClientCreate(CreateView):
+class ClientCreate(LoginRequiredMixin, CreateView):
   template_name = 'clinicMedicalSys/client_form.html'
   #context_object_name = 'client_create'
   model = Patient
   fields = '__all__'
   success_url = reverse_lazy('PatientsList')
 
-class ClientUpdate(UpdateView):
+class ClientUpdate(LoginRequiredMixin, UpdateView):
   template_name = 'clinicMedicalSys/client_form_update.html'
   context_object_name = 'client_update'
   model = Patient
   fields = '__all__'
   success_url = reverse_lazy('PatientsList')
 
-class ClientDelete(DeleteView):
+class ClientDelete(LoginRequiredMixin, DeleteView):
   template_name = 'clinicMedicalSys/client_confirm_delete.html'
   model = Patient
   context_object_name = 'client'

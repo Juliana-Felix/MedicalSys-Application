@@ -14,13 +14,13 @@ class Doctor(models.Model):
 
 class Patient(models.Model):
   name = models.CharField(max_length=200)
-  phone = models.CharField(max_length=13)
+  phone = models.CharField(max_length=11)
+  cep = models.CharField(max_length=8)
   address = models.CharField(max_length=200)
   number = models.CharField(max_length=4)
   city = models.CharField(max_length=50)
   state = models.CharField(max_length=2)
   country = models.CharField(max_length=50)
-  cep = models.CharField(max_length=9)
 
   created_at = models.DateTimeField(auto_now_add=True)
   edited = models.DateTimeField(auto_now=True)

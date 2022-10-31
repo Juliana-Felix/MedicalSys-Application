@@ -44,6 +44,78 @@
     </div>
   </div>
   <input type="submit" value="Atualizar" id="input-submit">
+  <script src="{% static 'jquery-3.6.1.min.js' %}"></script>
 </form>
 <a href="{% url 'PatientsList' %}">Voltar</a>
+
+{% block scripts %}
+<script src="{% static 'jquery.mask.min.js' %}"></script>
+<script>
+  $(document).ready(function ($) {
+
+    $('#id_cep').mask('00000-000');
+    $('#id_phone').mask('(00) 00000-0000');
+
+    function limpa_formulário_cep() {
+
+      $("#id_address").val("");
+      $("#id_city").val("");
+      $("#id_state").val("");
+    }
+
+    $("#id_cep").blur(function () {
+
+      var cep = $(this).val().replace(/\D/g, '');
+
+
+
+      if (cep != "") {
+
+
+        var validacep = /^[0-9]{8}$/;
+
+
+        if (validacep.test(cep)) {
+
+
+          $("#id_address").val("...");
+          $("#id_city").val("...");
+          $("#id_state").val("...");
+
+
+          $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+
+            if (!("erro" in dados)) {
+
+              $("#id_address").val(dados.logradouro);
+              $("#id_city").val(dados.localidade);
+              $("#id_state").val(dados.uf);
+
+            }
+            else {
+
+              limpa_formulário_cep();
+              alert("CEP não encontrado.");
+            }
+          });
+        }
+        else {
+
+          limpa_formulário_cep();
+          alert("Formato de CEP inválido.");
+        }
+      }
+      else {
+
+        limpa_formulário_cep();
+      }
+    });
+
+    $('#updateclient-form').submit(function () {
+      $('#updateclient-form').find(":input[id*='id_']").unmask();
+    })
+  });
+</script>
+
+{% endblock %}
 {% endblock %}
